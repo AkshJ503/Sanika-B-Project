@@ -1,0 +1,2622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Career Hub - Find Your Dream Job</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Header/Navigation */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Search Bar */
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Featured Companies */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .company-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--bg-light);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Job Listing Page */
+        .job-listing-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .filters-sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-option input {
+            cursor: pointer;
+        }
+
+        .filter-option label {
+            cursor: pointer;
+        }
+
+        .jobs-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .job-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .job-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .save-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .save-btn:hover,
+        .save-btn.saved {
+            color: var(--accent-color);
+        }
+
+        .job-details {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .job-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Dashboard */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .dashboard-menu {
+            list-style: none;
+        }
+
+        .dashboard-menu li {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dashboard-menu li:hover,
+        .dashboard-menu li.active {
+            background: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        .dashboard-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .profile-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            background: var(--bg-light);
+        }
+
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .applications-table th,
+        .applications-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .applications-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-shortlisted {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* AI Features */
+        .ai-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ai-feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .ai-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .ai-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            max-width: 70%;
+        }
+
+        .message.user {
+            background: var(--primary-color);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.ai {
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .chat-input-area {
+            padding: 1.5rem;
+            border-top: 2px solid #e5e7eb;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .job-listing-container,
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-sidebar,
+            .dashboard-sidebar {
+                position: static;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 Smart Career Hub</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('jobs')">Jobs</a></li>
+                <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="showPage('ai-features')">AI Tools</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" onclick="showLogin()">Login</button>
+                <button class="btn btn-primary" onclick="showRegister()">Register</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Find Your Dream Job</h1>
+                <p>Connect with top companies and accelerate your career with AI-powered tools</p>
+                
+                <div class="search-section">
+                    <form class="search-form" onsubmit="searchJobs(event)">
+                        <input type="text" class="search-input" placeholder="Job Title (e.g., Software Engineer)" id="job-title-search">
+                        <input type="text" class="search-input" placeholder="Location (e.g., Mumbai)" id="location-search">
+                        <button type="submit" class="btn btn-primary">Search Jobs</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Companies -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Featured Companies</h2>
+                <p>Top companies hiring now</p>
+            </div>
+            <div class="companies-grid">
+                <div class="company-card">
+                    <div class="company-logo">G</div>
+                    <h3>Google</h3>
+                    <p>45 Jobs Available</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">M</div>
+                    <h3>Microsoft</h3>
+                    <p>38 Jobs Available</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">A</div>
+                    <h3>Amazon</h3>
+                    <p>52 Jobs Available</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">T</div>
+                    <h3>TCS</h3>
+                    <p>67 Jobs Available</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">I</div>
+                    <h3>Infosys</h3>
+                    <p>43 Jobs Available</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">W</div>
+                    <h3>Wipro</h3>
+                    <p>31 Jobs Available</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section testimonials">
+            <div class="section-header">
+                <h2>Success Stories</h2>
+                <p>Hear from job seekers who found their dream careers</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Smart Career Hub helped me land my dream job at Google! The AI resume analyzer gave me insights I never would have thought of."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RP</div>
+                        <div>
+                            <strong>Rahul Patil</strong>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Software Engineer at Google</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The interview preparation tools were a game-changer. I felt confident and prepared for every interview."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div>
+                            <strong>Priya Sharma</strong>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Data Analyst at Microsoft</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Found the perfect role in just 2 weeks! The AI career recommendations matched me with opportunities I hadn't even considered."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AK</div>
+                        <div>
+                            <strong>Amit Kumar</strong>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Product Manager at Amazon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JOB LISTING PAGE -->
+    <div id="jobs-page" class="page">
+        <div class="job-listing-container">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <h2 style="margin-bottom: 1.5rem;">Filters</h2>
+                
+                <div class="filter-group">
+                    <h3>Category</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-tech" checked>
+                        <label for="cat-tech">Technology</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-marketing">
+                        <label for="cat-marketing">Marketing</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-finance">
+                        <label for="cat-finance">Finance</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-hr">
+                        <label for="cat-hr">HR</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Salary Range</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" id="sal-1">
+                        <label for="sal-1">₹3-5 LPA</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="sal-2">
+                        <label for="sal-2">₹5-10 LPA</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="sal-3">
+                        <label for="sal-3">₹10-20 LPA</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="sal-4">
+                        <label for="sal-4">₹20+ LPA</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Experience Level</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" id="exp-entry">
+                        <label for="exp-entry">Entry Level (0-2 yrs)</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="exp-mid">
+                        <label for="exp-mid">Mid Level (2-5 yrs)</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="exp-senior">
+                        <label for="exp-senior">Senior (5+ yrs)</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%;" onclick="applyFilters()">Apply Filters</button>
+            </aside>
+
+            <!-- Job Cards -->
+            <div class="jobs-grid" id="jobs-container">
+                <!-- Jobs will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- USER DASHBOARD -->
+    <div id="dashboard-page" class="page">
+        <div class="dashboard-container">
+            <!-- Dashboard Sidebar -->
+            <aside class="dashboard-sidebar">
+                <ul class="dashboard-menu">
+                    <li class="active" onclick="showDashboardSection('profile')">📝 Profile</li>
+                    <li onclick="showDashboardSection('resume')">📄 Resume</li>
+                    <li onclick="showDashboardSection('applications')">📋 Applications</li>
+                    <li onclick="showDashboardSection('ai-suggestions')">🤖 AI Suggestions</li>
+                </ul>
+            </aside>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Stats Overview -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-applications">0</div>
+                        <div class="stat-label">Applications Sent</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="shortlisted-count">0</div>
+                        <div class="stat-label">Shortlisted</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="saved-jobs-count">0</div>
+                        <div class="stat-label">Saved Jobs</div>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile-section" class="dashboard-section">
+                    <h2>Edit Profile</h2>
+                    <form class="profile-section" onsubmit="saveProfile(event)">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="profile-name" value="" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="profile-email" value="" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="profile-phone" value="" placeholder="Enter your phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Position</label>
+                            <input type="text" id="profile-position" value="" placeholder="Your current role">
+                        </div>
+                        <div class="form-group">
+                            <label>Skills</label>
+                            <input type="text" id="profile-skills" value="" placeholder="Your skills (comma separated)">
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea id="profile-bio" rows="4" placeholder="Tell us about yourself"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+
+                <!-- Resume Section -->
+                <div id="resume-section" class="dashboard-section hidden">
+                    <h2>Resume Upload</h2>
+                    <div class="upload-area" onclick="document.getElementById('resume-upload').click()">
+                        <input type="file" id="resume-upload" accept=".pdf" style="display: none;" onchange="handleResumeUpload(event)">
+                        <p style="font-size: 3rem; margin-bottom: 1rem;">📄</p>
+                        <h3>Upload Your Resume (PDF)</h3>
+                        <p style="color: var(--text-light);">Click to browse or drag and drop your PDF file here</p>
+                        <p id="uploaded-file-name" style="color: var(--success); font-weight: 600; margin-top: 1rem;"></p>
+                    </div>
+                    
+                    <!-- Name Input Form (shown after file selection) -->
+                    <div id="resume-name-form" class="hidden" style="margin-top: 2rem; padding: 2rem; background: var(--bg-light); border-radius: 12px;">
+                        <h3 style="margin-bottom: 1rem;">Confirm Your Details</h3>
+                        <div class="form-group">
+                            <label>Full Name (as on Resume)</label>
+                            <input type="text" id="resume-applicant-name" placeholder="Enter your full name" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                        </div>
+                        <button class="btn btn-primary" onclick="confirmResumeUpload()">Confirm & Upload</button>
+                        <button class="btn btn-outline" onclick="cancelResumeUpload()" style="margin-left: 0.5rem;">Cancel</button>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h3>Current Resume</h3>
+                        <div id="current-resume-display" style="padding: 1rem; background: var(--bg-light); border-radius: 8px; margin-top: 1rem; text-align: center; color: var(--text-light);">
+                            <p>📄 No resume uploaded yet</p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Upload your resume to get started</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Section -->
+                <div id="applications-section" class="dashboard-section hidden">
+                    <h2>My Applications</h2>
+                    <div id="applications-table-container">
+                        <table class="applications-table">
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Company</th>
+                                    <th>Applied Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applications-table-body">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-light);">
+                                        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">📋 No applications yet</p>
+                                        <p style="font-size: 0.9rem;">Start applying for jobs to see your applications here</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- AI Suggestions Section -->
+                <div id="ai-suggestions-section" class="dashboard-section hidden">
+                    <h2>AI Career Suggestions</h2>
+                    <p style="margin-bottom: 2rem; color: var(--text-light);">Based on your profile, skills, and experience</p>
+                    
+                    <div class="jobs-grid">
+                        <div class="job-card">
+                            <div class="job-header">
+                                <div>
+                                    <h3 class="job-title">AI/ML Engineer</h3>
+                                    <p class="company-name">Tech Mahindra</p>
+                                </div>
+                                <div style="background: var(--success); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem;">95% Match</div>
+                            </div>
+                            <div class="job-details">
+                                <div class="job-detail">💰 ₹12-18 LPA</div>
+                                <div class="job-detail">📍 Pune</div>
+                                <div class="job-detail">⏱️ Full Time</div>
+                            </div>
+                            <p style="margin: 1rem 0; color: var(--text-light);">Looking for ML engineers with Python and TensorFlow experience. Your skills align perfectly!</p>
+                            <div class="job-actions">
+                                <button class="btn btn-primary">Apply Now</button>
+                                <button class="btn btn-outline">Learn More</button>
+                            </div>
+                        </div>
+
+                        <div class="job-card">
+                            <div class="job-header">
+                                <div>
+                                    <h3 class="job-title">Full Stack Developer</h3>
+                                    <p class="company-name">Cognizant</p>
+                                </div>
+                                <div style="background: var(--success); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem;">88% Match</div>
+                            </div>
+                            <div class="job-details">
+                                <div class="job-detail">💰 ₹10-15 LPA</div>
+                                <div class="job-detail">📍 Bangalore</div>
+                                <div class="job-detail">⏱️ Full Time</div>
+                            </div>
+                            <p style="margin: 1rem 0; color: var(--text-light);">React and Node.js expertise needed. Great opportunity to grow your full-stack skills!</p>
+                            <div class="job-actions">
+                                <button class="btn btn-primary">Apply Now</button>
+                                <button class="btn btn-outline">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI FEATURES PAGE -->
+    <div id="ai-features-page" class="page">
+        <section class="section">
+            <div class="section-header">
+                <h2>AI-Powered Career Tools</h2>
+                <p>Leverage cutting-edge AI to boost your career prospects</p>
+            </div>
+
+            <div class="ai-features-grid">
+                <div class="ai-feature-card" onclick="showAITool('resume-analyzer')">
+                    <div class="ai-icon">📊</div>
+                    <h3>Resume Analyzer</h3>
+                    <p style="color: var(--text-light); margin: 1rem 0;">Get AI-powered insights and suggestions to improve your resume</p>
+                    <button class="btn btn-primary">Try Now</button>
+                </div>
+
+                <div class="ai-feature-card" onclick="showAITool('interview-prep')">
+                    <div class="ai-icon">💬</div>
+                    <h3>Interview Prep</h3>
+                    <p style="color: var(--text-light); margin: 1rem 0;">Generate personalized interview questions for any role</p>
+                    <button class="btn btn-primary">Try Now</button>
+                </div>
+
+                <div class="ai-feature-card" onclick="showAITool('career-recommend')">
+                    <div class="ai-icon">🎯</div>
+                    <h3>Career Recommender</h3>
+                    <p style="color: var(--text-light); margin: 1rem 0;">Discover ideal career paths based on your skills</p>
+                    <button class="btn btn-primary">Try Now</button>
+                </div>
+
+                <div class="ai-feature-card" onclick="showAITool('emotional-support')">
+                    <div class="ai-icon">💙</div>
+                    <h3>Career Coach Chat</h3>
+                    <p style="color: var(--text-light); margin: 1rem 0;">Get emotional support and career guidance</p>
+                    <button class="btn btn-primary">Try Now</button>
+                </div>
+            </div>
+
+            <!-- AI Tool Sections -->
+            <div id="resume-analyzer-tool" class="hidden" style="margin-top: 3rem;">
+                <h2>Resume Analyzer</h2>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-top: 1rem;">
+                    <div class="upload-area" onclick="document.getElementById('ai-resume-upload').click()">
+                        <input type="file" id="ai-resume-upload" accept=".pdf" style="display: none;" onchange="analyzeResume(event)">
+                        <p style="font-size: 3rem; margin-bottom: 1rem;">📄</p>
+                        <h3>Upload Resume for AI Analysis</h3>
+                        <p style="color: var(--text-light);">Our AI will analyze and provide actionable feedback</p>
+                    </div>
+                    <div id="resume-analysis-result" class="hidden" style="margin-top: 2rem; padding: 2rem; background: var(--bg-light); border-radius: 8px;">
+                        <h3 style="color: var(--success); margin-bottom: 1rem;">✓ Analysis Complete!</h3>
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>Overall Score: <span style="color: var(--primary-color);">78/100</span></h4>
+                            <div style="background: #e5e7eb; height: 10px; border-radius: 10px; margin-top: 0.5rem;">
+                                <div style="background: var(--primary-color); width: 78%; height: 100%; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        <h4>Recommendations:</h4>
+                        <ul style="margin-left: 1.5rem; color: var(--text-dark); line-height: 1.8;">
+                            <li>Add quantifiable achievements (increased by X%, reduced by Y hours)</li>
+                            <li>Include more technical keywords relevant to your target role</li>
+                            <li>Expand your skills section with in-demand technologies</li>
+                            <li>Add a professional summary at the top</li>
+                            <li>Consider formatting improvements for better ATS compatibility</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="interview-prep-tool" class="hidden" style="margin-top: 3rem;">
+                <h2>Interview Question Generator</h2>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-top: 1rem;">
+                    <div class="form-group">
+                        <label>Job Role</label>
+                        <input type="text" id="interview-role" placeholder="e.g., Software Engineer, Product Manager">
+                    </div>
+                    <div class="form-group">
+                        <label>Experience Level</label>
+                        <select id="interview-level">
+                            <option>Entry Level</option>
+                            <option>Mid Level</option>
+                            <option>Senior Level</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateInterviewQuestions()">Generate Questions</button>
+                    
+                    <div id="interview-questions-result" class="hidden" style="margin-top: 2rem;">
+                        <h3 style="margin-bottom: 1rem;">Interview Questions:</h3>
+                        <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">1. Tell me about your experience with agile development methodologies.</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;"><strong>Tip:</strong> Focus on specific examples and your role in the team.</p>
+                        </div>
+                        <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">2. How do you handle code reviews and feedback?</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;"><strong>Tip:</strong> Demonstrate growth mindset and collaboration skills.</p>
+                        </div>
+                        <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">3. Describe a challenging bug you fixed and your approach.</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;"><strong>Tip:</strong> Use the STAR method (Situation, Task, Action, Result).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="career-recommend-tool" class="hidden" style="margin-top: 3rem;">
+                <h2>AI Career Recommendations</h2>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-top: 1rem;">
+                    <div class="form-group">
+                        <label>Your Top Skills (comma separated)</label>
+                        <input type="text" id="career-skills" placeholder="e.g., JavaScript, React, Python, Data Analysis">
+                    </div>
+                    <div class="form-group">
+                        <label>Years of Experience</label>
+                        <select id="career-experience">
+                            <option>0-2 years</option>
+                            <option>2-5 years</option>
+                            <option>5-10 years</option>
+                            <option>10+ years</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="getCareerRecommendations()">Get Recommendations</button>
+                    
+                    <div id="career-recommendations-result" class="hidden" style="margin-top: 2rem;">
+                        <h3 style="margin-bottom: 1.5rem;">Recommended Career Paths:</h3>
+                        <div style="display: grid; gap: 1.5rem;">
+                            <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Full Stack Developer</h4>
+                                <p style="margin-bottom: 1rem; color: var(--text-dark);">Perfect match for your JavaScript and React skills. High demand with avg. salary ₹12-18 LPA</p>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <span style="background: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">React</span>
+                                    <span style="background: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">Node.js</span>
+                                    <span style="background: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">JavaScript</span>
+                                </div>
+                            </div>
+                            <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-color);">
+                                <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Data Engineer</h4>
+                                <p style="margin-bottom: 1rem; color: var(--text-dark);">Leverage your Python skills. Growing field with avg. salary ₹10-16 LPA</p>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <span style="background: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">Python</span>
+                                    <span style="background: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">SQL</span>
+                                    <span style="background: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">ETL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="emotional-support-tool" class="hidden" style="margin-top: 3rem;">
+                <h2>Career Coach Chat</h2>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message ai">
+                            <p>👋 Hi! I'm your AI Career Coach. I'm here to support you through your job search journey. How are you feeling about your career today?</p>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Type your message..." onkeypress="handleChatEnter(event)">
+                        <button class="btn btn-primary" onclick="sendChatMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Sample job data
+        const jobsData = [
+            {
+                id: 1,
+                title: "Senior Software Engineer",
+                company: "Google",
+                salary: "₹25-35 LPA",
+                location: "Bangalore",
+                category: "Technology",
+                experience: "Senior",
+                saved: false
+            },
+            {
+                id: 2,
+                title: "Full Stack Developer",
+                company: "Microsoft",
+                salary: "₹15-22 LPA",
+                location: "Hyderabad",
+                category: "Technology",
+                experience: "Mid Level",
+                saved: false
+            },
+            {
+                id: 3,
+                title: "DevOps Engineer",
+                company: "Amazon",
+                salary: "₹18-28 LPA",
+                location: "Mumbai",
+                category: "Technology",
+                experience: "Mid Level",
+                saved: false
+            },
+            {
+                id: 4,
+                title: "Data Scientist",
+                company: "TCS",
+                salary: "₹12-18 LPA",
+                location: "Pune",
+                category: "Technology",
+                experience: "Mid Level",
+                saved: false
+            },
+            {
+                id: 5,
+                title: "Frontend Developer",
+                company: "Infosys",
+                salary: "₹8-12 LPA",
+                location: "Chennai",
+                category: "Technology",
+                experience: "Entry Level",
+                saved: false
+            },
+            {
+                id: 6,
+                title: "Backend Developer",
+                company: "Wipro",
+                salary: "₹10-15 LPA",
+                location: "Bangalore",
+                category: "Technology",
+                experience: "Mid Level",
+                saved: false
+            }
+        ];
+
+        // Navigation functions
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageName + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Load jobs if going to jobs page
+            if (pageName === 'jobs') {
+                loadJobs();
+            }
+            
+            // Update stats if going to dashboard
+            if (pageName === 'dashboard') {
+                updateStats();
+            }
+            
+            // Scroll to top when changing pages
+            window.scrollTo(0, 0);
+        }
+
+        function showLogin() {
+            const loginHTML = `
+                <div id="auth-modal" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                ">
+                    <div style="
+                        background: white;
+                        padding: 2.5rem;
+                        border-radius: 12px;
+                        max-width: 400px;
+                        width: 90%;
+                    ">
+                        <h2 style="margin-bottom: 0.5rem; color: var(--primary-color);">Welcome Back!</h2>
+                        <p style="color: var(--text-light); margin-bottom: 2rem;">Login to your Smart Career Hub account</p>
+                        
+                        <form id="login-form" onsubmit="handleLogin(event)">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="login-email" required placeholder="your.email@example.com" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="login-password" required placeholder="Enter your password" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" id="remember-me">
+                                    <span style="font-size: 0.9rem;">Remember me</span>
+                                </label>
+                                <a href="#" style="color: var(--primary-color); font-size: 0.9rem; text-decoration: none;">Forgot Password?</a>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Login</button>
+                            
+                            <p style="text-align: center; color: var(--text-light); font-size: 0.9rem;">
+                                Don't have an account? 
+                                <a href="#" onclick="closeAuthModal(); showRegister(); return false;" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Register here</a>
+                            </p>
+                            
+                            <button type="button" class="btn btn-outline" onclick="closeAuthModal()" style="width: 100%; margin-top: 1rem;">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', loginHTML);
+            setTimeout(() => document.getElementById('login-email').focus(), 100);
+        }
+
+        function showRegister() {
+            const registerHTML = `
+                <div id="auth-modal" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                ">
+                    <div style="
+                        background: white;
+                        padding: 2.5rem;
+                        border-radius: 12px;
+                        max-width: 400px;
+                        width: 90%;
+                        max-height: 90vh;
+                        overflow-y: auto;
+                    ">
+                        <h2 style="margin-bottom: 0.5rem; color: var(--primary-color);">Create Account</h2>
+                        <p style="color: var(--text-light); margin-bottom: 2rem;">Join Smart Career Hub today!</p>
+                        
+                        <form id="register-form" onsubmit="handleRegister(event)">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="reg-name" required placeholder="Your full name" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="reg-email" required placeholder="your.email@example.com" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" id="reg-phone" required placeholder="+91 98765 43210" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="reg-password" required placeholder="Create a strong password" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" id="reg-confirm-password" required placeholder="Re-enter password" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <label style="display: flex; align-items: start; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" id="terms-agree" required style="margin-top: 0.3rem;">
+                                    <span style="font-size: 0.9rem;">I agree to the Terms & Conditions and Privacy Policy</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Create Account</button>
+                            
+                            <p style="text-align: center; color: var(--text-light); font-size: 0.9rem;">
+                                Already have an account? 
+                                <a href="#" onclick="closeAuthModal(); showLogin(); return false;" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Login here</a>
+                            </p>
+                            
+                            <button type="button" class="btn btn-outline" onclick="closeAuthModal()" style="width: 100%; margin-top: 1rem;">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', registerHTML);
+            setTimeout(() => document.getElementById('reg-name').focus(), 100);
+        }
+        
+        function closeAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // In real app, this would validate against backend
+            // For demo, we'll check if user is registered
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            const user = registeredUsers.find(u => u.email === email);
+            
+            if (user && user.password === password) {
+                // Login successful
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userName', user.name);
+                
+                closeAuthModal();
+                alert(`✅ Welcome back, ${user.name}!\n\nYou have successfully logged in.`);
+                
+                // Update UI
+                updateAuthButtons();
+            } else {
+                alert('❌ Invalid email or password.\n\nPlease try again or register for a new account.');
+            }
+        }
+        
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('❌ Passwords do not match!\n\nPlease make sure both passwords are the same.');
+                return;
+            }
+            
+            // Validate password strength
+            if (password.length < 6) {
+                alert('❌ Password too weak!\n\nPassword must be at least 6 characters long.');
+                return;
+            }
+            
+            // Check if email already exists
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            const existingUser = registeredUsers.find(u => u.email === email);
+            
+            if (existingUser) {
+                alert('❌ Email already registered!\n\nPlease use a different email or try logging in.');
+                return;
+            }
+            
+            // Register new user
+            const newUser = {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password,
+                registeredDate: new Date().toISOString()
+            };
+            
+            registeredUsers.push(newUser);
+            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+            
+            // Auto login
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', name);
+            
+            // Update profile
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', phone);
+            
+            closeAuthModal();
+            alert(`✅ Registration Successful!\n\nWelcome, ${name}!\n\nYour account has been created and you are now logged in.`);
+            
+            // Update UI
+            updateAuthButtons();
+        }
+        
+        function updateAuthButtons() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userName = localStorage.getItem('userName') || 'User';
+            
+            const authButtonsDiv = document.querySelector('.auth-buttons');
+            if (authButtonsDiv && isLoggedIn) {
+                authButtonsDiv.innerHTML = `
+                    <span style="color: var(--text-dark); font-weight: 600; margin-right: 1rem;">👋 ${userName}</span>
+                    <button class="btn btn-outline" onclick="handleLogout()">Logout</button>
+                `;
+            }
+        }
+        
+        function handleLogout() {
+            const confirmed = confirm('Are you sure you want to logout?');
+            if (confirmed) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('currentUser');
+                
+                alert('✅ You have been logged out successfully.');
+                
+                // Restore login/register buttons
+                const authButtonsDiv = document.querySelector('.auth-buttons');
+                if (authButtonsDiv) {
+                    authButtonsDiv.innerHTML = `
+                        <button class="btn btn-outline" onclick="showLogin()">Login</button>
+                        <button class="btn btn-primary" onclick="showRegister()">Register</button>
+                    `;
+                }
+                
+                // Redirect to home
+                showPage('home');
+            }
+        }
+
+        // Job listing functions
+        function loadJobs() {
+            const container = document.getElementById('jobs-container');
+            container.innerHTML = '';
+            
+            jobsData.forEach(job => {
+                const jobCard = createJobCard(job);
+                container.innerHTML += jobCard;
+            });
+        }
+
+        function createJobCard(job) {
+            return `
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">${job.title}</h3>
+                            <p class="company-name">${job.company}</p>
+                        </div>
+                        <button class="save-btn ${job.saved ? 'saved' : ''}" onclick="toggleSave(${job.id})">
+                            ${job.saved ? '★' : '☆'}
+                        </button>
+                    </div>
+                    <div class="job-details">
+                        <div class="job-detail">💰 ${job.salary}</div>
+                        <div class="job-detail">📍 ${job.location}</div>
+                        <div class="job-detail">⏱️ Full Time</div>
+                    </div>
+                    <p style="margin: 1rem 0; color: var(--text-light);">
+                        We are looking for talented ${job.title.toLowerCase()} to join our team and work on exciting projects.
+                    </p>
+                    <div class="job-actions">
+                        <button class="btn btn-primary" onclick="applyJob(${job.id})">Apply Now</button>
+                        <button class="btn btn-outline" onclick="viewJobDetails(${job.id})">View Details</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleSave(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            job.saved = !job.saved;
+            loadJobs();
+        }
+
+        function applyJob(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (job) {
+                // Show application form with resume upload
+                showApplicationForm(job);
+            }
+        }
+        
+        function showApplicationForm(job) {
+            // Create modal/form for application
+            const formHTML = `
+                <div id="application-modal" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                ">
+                    <div style="
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 12px;
+                        max-width: 500px;
+                        width: 90%;
+                        max-height: 90vh;
+                        overflow-y: auto;
+                    ">
+                        <h2 style="margin-bottom: 1rem;">Apply for ${job.title}</h2>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">${job.company} • ${job.location}</p>
+                        
+                        <form id="job-application-form" onsubmit="submitApplication(event, ${job.id})">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" id="app-name" required placeholder="Your full name" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" id="app-email" required placeholder="your.email@example.com" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Phone *</label>
+                                <input type="tel" id="app-phone" required placeholder="+91 98765 43210" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Upload Resume (PDF) *</label>
+                                <input type="file" id="app-resume" required accept=".pdf" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">PDF format only, max 5MB</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Cover Letter (Optional)</label>
+                                <textarea id="app-cover-letter" rows="4" placeholder="Why are you interested in this position?" style="width: 100%; padding: 0.8rem; border: 2px solid #e5e7eb; border-radius: 8px;"></textarea>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                                <button type="submit" class="btn btn-primary" style="flex: 1;">Submit Application</button>
+                                <button type="button" class="btn btn-outline" onclick="closeApplicationForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            // Add to body
+            document.body.insertAdjacentHTML('beforeend', formHTML);
+            
+            // Focus on name field
+            setTimeout(() => {
+                document.getElementById('app-name').focus();
+            }, 100);
+        }
+        
+        function closeApplicationForm() {
+            const modal = document.getElementById('application-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        function submitApplication(event, jobId) {
+            event.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('app-name').value.trim();
+            const email = document.getElementById('app-email').value.trim();
+            const phone = document.getElementById('app-phone').value.trim();
+            const resumeFile = document.getElementById('app-resume').files[0];
+            const coverLetter = document.getElementById('app-cover-letter').value.trim();
+            
+            // Validate resume
+            if (!resumeFile) {
+                alert('⚠️ Please upload your resume (PDF)');
+                return;
+            }
+            
+            if (resumeFile.type !== 'application/pdf') {
+                alert('⚠️ Resume must be a PDF file');
+                return;
+            }
+            
+            if (resumeFile.size > 5 * 1024 * 1024) { // 5MB
+                alert('⚠️ Resume file size must be less than 5MB');
+                return;
+            }
+            
+            // Get job details
+            const job = jobsData.find(j => j.id === jobId);
+            if (!job) {
+                alert('⚠️ Job not found');
+                return;
+            }
+            
+            // Check if already applied
+            const applications = JSON.parse(localStorage.getItem('myApplications') || '[]');
+            const alreadyApplied = applications.some(app => app.jobId === jobId);
+            
+            if (alreadyApplied) {
+                alert('⚠️ You have already applied for this job!');
+                closeApplicationForm();
+                return;
+            }
+            
+            // Get current date
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+            
+            // Calculate next interview date (7 days from now)
+            const nextInterviewDate = new Date();
+            nextInterviewDate.setDate(nextInterviewDate.getDate() + 7);
+            const formattedInterviewDate = nextInterviewDate.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+            
+            // Save application
+            applications.push({
+                jobId: job.id,
+                jobTitle: job.title,
+                company: job.company,
+                appliedDate: formattedDate,
+                status: 'Pending',
+                applicantName: name,
+                applicantEmail: email,
+                applicantPhone: phone,
+                resumeFileName: resumeFile.name,
+                coverLetter: coverLetter,
+                nextInterviewDate: formattedInterviewDate,
+                jobLocation: job.location,
+                jobSalary: job.salary,
+                applicationId: 'APP' + Date.now()
+            });
+            
+            localStorage.setItem('myApplications', JSON.stringify(applications));
+            
+            // Close form
+            closeApplicationForm();
+            
+            // Show success and navigate to dashboard
+            alert(`✅ Application Submitted Successfully!\n\nApplicant: ${name}\nJob: ${job.title}\nCompany: ${job.company}\nResume: ${resumeFile.name}\n\nYour application has been sent to the employer.\nCheck your Dashboard for updates.`);
+            
+            showPage('dashboard');
+            showDashboardSection('applications');
+            loadApplications();
+        }
+        
+        function loadApplications() {
+            // Get applications from localStorage
+            const applications = JSON.parse(localStorage.getItem('myApplications') || '[]');
+            
+            const tableBody = document.getElementById('applications-table-body');
+            if (!tableBody) return;
+            
+            if (applications.length === 0) {
+                // Show empty state
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-light);">
+                            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">📋 No applications yet</p>
+                            <p style="font-size: 0.9rem;">Start applying for jobs to see your applications here</p>
+                        </td>
+                    </tr>
+                `;
+                updateStats();
+                return;
+            }
+            
+            // Clear and rebuild table with real applications
+            tableBody.innerHTML = '';
+            
+            applications.forEach((app, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${app.jobTitle}</td>
+                    <td>${app.company}</td>
+                    <td>${app.appliedDate}</td>
+                    <td><span class="status-badge status-${app.status.toLowerCase()}">${app.status}</span></td>
+                    <td><button class="btn btn-outline" style="padding: 0.4rem 1rem;" onclick="viewApplication('${app.jobTitle}', '${app.company}', '${app.status}', '${app.appliedDate}')">View</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update stats
+            updateStats();
+        }
+        
+        function updateStats() {
+            const applications = JSON.parse(localStorage.getItem('myApplications') || '[]');
+            const savedJobs = jobsData.filter(job => job.saved).length;
+            const shortlisted = applications.filter(app => app.status === 'Shortlisted').length;
+            
+            document.getElementById('total-applications').textContent = applications.length;
+            document.getElementById('shortlisted-count').textContent = shortlisted;
+            document.getElementById('saved-jobs-count').textContent = savedJobs;
+        }
+        
+
+        function viewJobDetails(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (job) {
+                // Show only job details - not application details
+                const details = `
+📋 JOB DETAILS
+
+Position: ${job.title}
+Company: ${job.company}
+Location: ${job.location}
+Salary: ${job.salary}
+Experience: ${job.experience}
+Job Type: Full Time
+
+📝 Job Description:
+We are looking for talented ${job.title.toLowerCase()} to join our team and work on exciting projects. You will be working with cutting-edge technologies and collaborating with a dynamic team.
+
+Requirements:
+• ${job.experience} experience required
+• Strong technical skills
+• Good communication
+• Team player
+
+Benefits:
+• Competitive salary
+• Health insurance
+• Work from home options
+• Learning opportunities
+
+Click "Apply Now" to submit your application!
+                `.trim();
+                
+                alert(details);
+            }
+        }
+
+        function searchJobs(event) {
+            event.preventDefault();
+            const jobTitle = document.getElementById('job-title-search').value;
+            const location = document.getElementById('location-search').value;
+            
+            // Navigate to jobs page
+            showPage('jobs');
+            
+            // Optional: Could filter jobs based on search terms
+            if (jobTitle || location) {
+                console.log('Searching for:', jobTitle, 'in', location);
+                // Filter logic would go here when you add backend
+            }
+        }
+
+        function applyFilters() {
+            // Get all selected filters
+            const selectedCategories = [];
+            const selectedSalaries = [];
+            const selectedExperience = [];
+            
+            // Category filters
+            if (document.getElementById('cat-tech').checked) selectedCategories.push('Technology');
+            if (document.getElementById('cat-marketing').checked) selectedCategories.push('Marketing');
+            if (document.getElementById('cat-finance').checked) selectedCategories.push('Finance');
+            if (document.getElementById('cat-hr').checked) selectedCategories.push('HR');
+            
+            // Salary filters
+            if (document.getElementById('sal-1').checked) selectedSalaries.push('3-5');
+            if (document.getElementById('sal-2').checked) selectedSalaries.push('5-10');
+            if (document.getElementById('sal-3').checked) selectedSalaries.push('10-20');
+            if (document.getElementById('sal-4').checked) selectedSalaries.push('20+');
+            
+            // Experience filters
+            if (document.getElementById('exp-entry').checked) selectedExperience.push('Entry Level');
+            if (document.getElementById('exp-mid').checked) selectedExperience.push('Mid Level');
+            if (document.getElementById('exp-senior').checked) selectedExperience.push('Senior');
+            
+            // Filter jobs
+            let filteredJobs = jobsData;
+            
+            // Apply category filter
+            if (selectedCategories.length > 0) {
+                filteredJobs = filteredJobs.filter(job => selectedCategories.includes(job.category));
+            }
+            
+            // Apply salary filter
+            if (selectedSalaries.length > 0) {
+                filteredJobs = filteredJobs.filter(job => {
+                    // Extract salary range from job.salary (e.g., "₹15-22 LPA")
+                    const salaryMatch = job.salary.match(/(\d+)-(\d+)/);
+                    if (salaryMatch) {
+                        const minSalary = parseInt(salaryMatch[1]);
+                        const maxSalary = parseInt(salaryMatch[2]);
+                        
+                        return selectedSalaries.some(range => {
+                            if (range === '3-5') return minSalary >= 3 && maxSalary <= 10;
+                            if (range === '5-10') return minSalary >= 5 && maxSalary <= 15;
+                            if (range === '10-20') return minSalary >= 10 && maxSalary <= 25;
+                            if (range === '20+') return minSalary >= 20;
+                            return false;
+                        });
+                    }
+                    return false;
+                });
+            }
+            
+            // Apply experience filter
+            if (selectedExperience.length > 0) {
+                filteredJobs = filteredJobs.filter(job => selectedExperience.includes(job.experience));
+            }
+            
+            // Display filtered jobs
+            displayFilteredJobs(filteredJobs);
+            
+            // Show filter result message
+            const message = `Found ${filteredJobs.length} job${filteredJobs.length !== 1 ? 's' : ''} matching your filters`;
+            showFilterMessage(message);
+        }
+        
+        function displayFilteredJobs(jobs) {
+            const container = document.getElementById('jobs-container');
+            container.innerHTML = '';
+            
+            if (jobs.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px;">
+                        <h3 style="color: var(--text-light); margin-bottom: 1rem;">No jobs found</h3>
+                        <p style="color: var(--text-light);">Try adjusting your filters to see more results.</p>
+                        <button class="btn btn-primary" onclick="clearFilters()" style="margin-top: 1rem;">Clear Filters</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            jobs.forEach(job => {
+                const jobCard = createJobCard(job);
+                container.innerHTML += jobCard;
+            });
+        }
+        
+        function showFilterMessage(message) {
+            // Create or update filter message
+            let messageDiv = document.getElementById('filter-message');
+            if (!messageDiv) {
+                messageDiv = document.createElement('div');
+                messageDiv.id = 'filter-message';
+                messageDiv.style.cssText = `
+                    background: var(--success);
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 8px;
+                    margin-bottom: 1rem;
+                    text-align: center;
+                    font-weight: 600;
+                `;
+                document.getElementById('jobs-container').parentElement.insertBefore(
+                    messageDiv, 
+                    document.getElementById('jobs-container')
+                );
+            }
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        function clearFilters() {
+            // Uncheck all filters
+            document.querySelectorAll('.filter-option input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Check Technology by default
+            document.getElementById('cat-tech').checked = true;
+            
+            // Reload all jobs
+            loadJobs();
+            showFilterMessage('Filters cleared - showing all jobs');
+        }
+
+        // Dashboard functions
+        function showDashboardSection(section) {
+            // Update menu active state - remove active from all, then add to clicked one
+            const menuItems = document.querySelectorAll('.dashboard-menu li');
+            const sections = ['profile', 'resume', 'applications', 'ai-suggestions'];
+            
+            menuItems.forEach((item, index) => {
+                item.classList.remove('active');
+                if (sections[index] === section) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Hide all dashboard sections
+            document.querySelectorAll('.dashboard-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(section + '-section');
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                
+                // Load applications if showing applications section
+                if (section === 'applications') {
+                    loadApplications();
+                }
+            } else {
+                console.error('Section not found:', section);
+            }
+        }
+
+        let pendingResumeFile = null;
+        
+        function handleResumeUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                // Store file temporarily
+                pendingResumeFile = file;
+                
+                // Show file name
+                document.getElementById('uploaded-file-name').textContent = `Selected: ${file.name}`;
+                
+                // Show name input form
+                document.getElementById('resume-name-form').classList.remove('hidden');
+                
+                // Focus on name input
+                setTimeout(() => {
+                    document.getElementById('resume-applicant-name').focus();
+                }, 100);
+                
+            } else if (file) {
+                alert('⚠️ Please upload a PDF file only.');
+                event.target.value = '';
+            }
+        }
+        
+        function confirmResumeUpload() {
+            const nameInput = document.getElementById('resume-applicant-name');
+            const userName = nameInput.value.trim();
+            
+            if (!userName) {
+                alert('⚠️ Please enter your full name.');
+                nameInput.focus();
+                return;
+            }
+            
+            if (!pendingResumeFile) {
+                alert('⚠️ No file selected.');
+                return;
+            }
+            
+            // Save resume and name
+            localStorage.setItem('resumeUploaded', 'true');
+            localStorage.setItem('resumeFileName', pendingResumeFile.name);
+            localStorage.setItem('userName', userName);
+            
+            // Update profile name field
+            const profileNameField = document.getElementById('profile-name');
+            if (profileNameField) {
+                profileNameField.value = userName;
+            }
+            
+            // Update current resume display
+            const currentResumeDisplay = document.getElementById('current-resume-display');
+            if (currentResumeDisplay) {
+                const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                currentResumeDisplay.style.textAlign = 'left';
+                currentResumeDisplay.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="font-weight: 600; margin: 0;">${pendingResumeFile.name}</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin: 0.3rem 0 0 0;">Uploaded on: ${today}</p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-outline" style="padding: 0.5rem 1rem;" onclick="alert('View functionality - would open PDF viewer')">View</button>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem;" onclick="alert('Download functionality - would download file')">Download</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Hide form and reset
+            document.getElementById('resume-name-form').classList.add('hidden');
+            document.getElementById('uploaded-file-name').textContent = '';
+            nameInput.value = '';
+            pendingResumeFile = null;
+            
+            // Show success message
+            alert(`✓ Resume uploaded successfully!\n\nApplicant Name: ${userName}\nFile: ${localStorage.getItem('resumeFileName')}\n\nYou can now apply for jobs.`);
+        }
+        
+        function cancelResumeUpload() {
+            // Reset everything
+            document.getElementById('resume-upload').value = '';
+            document.getElementById('uploaded-file-name').textContent = '';
+            document.getElementById('resume-applicant-name').value = '';
+            document.getElementById('resume-name-form').classList.add('hidden');
+            pendingResumeFile = null;
+        }
+        
+        function saveProfile(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('profile-name').value;
+            const email = document.getElementById('profile-email').value;
+            const phone = document.getElementById('profile-phone').value;
+            const position = document.getElementById('profile-position').value;
+            const skills = document.getElementById('profile-skills').value;
+            const bio = document.getElementById('profile-bio').value;
+            
+            // Save to localStorage
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('userPosition', position);
+            localStorage.setItem('userSkills', skills);
+            localStorage.setItem('userBio', bio);
+            
+            alert('✓ Profile saved successfully!');
+        }
+
+        function viewApplication(jobTitle, company, status, appliedDate) {
+            // Get application details from localStorage
+            const applications = JSON.parse(localStorage.getItem('myApplications') || '[]');
+            const app = applications.find(a => a.jobTitle === jobTitle && a.company === company);
+            
+            let statusMessage = '';
+            let detailsText = '';
+            
+            if (app) {
+                // Show full application details if found in localStorage
+                detailsText = `
+📋 APPLICATION DETAILS
+
+Application ID: ${app.applicationId || 'N/A'}
+
+👤 APPLICANT INFORMATION
+Name: ${app.applicantName || 'John Doe'}
+Email: ${app.applicantEmail || 'N/A'}
+Phone: ${app.applicantPhone || 'N/A'}
+Resume: ${app.resumeFileName || 'N/A'}
+
+💼 JOB INFORMATION
+Job Title: ${jobTitle}
+Company: ${company}
+Location: ${app.jobLocation || 'N/A'}
+Salary: ${app.jobSalary || 'N/A'}
+
+📅 APPLICATION STATUS
+Applied Date: ${appliedDate}
+Status: ${status}
+                `;
+                
+                if (status === 'Shortlisted') {
+                    statusMessage = `
+🎉 CONGRATULATIONS!
+You have been shortlisted for the next round.
+
+Next Interview: ${app.nextInterviewDate || 'TBD'}
+Interview Type: Technical Round
+Mode: Video Call
+
+Preparation Tips:
+• Review job description thoroughly
+• Prepare technical questions
+• Research about the company
+• Test your internet connection
+                    `;
+                } else if (status === 'Pending') {
+                    statusMessage = `
+⏳ UNDER REVIEW
+
+Your application is being reviewed by the HR team.
+
+Expected Response: Within 5-7 business days
+Next Update Expected: ${app.nextInterviewDate || 'TBD'}
+
+What's happening:
+1. ✓ Resume received
+2. ⏳ HR screening in progress
+3. ⏱️ Technical review pending
+                    `;
+                } else if (status === 'Rejected') {
+                    statusMessage = `
+❌ APPLICATION UPDATE
+
+Unfortunately, your application was not selected.
+
+Feedback:
+The position required more years of specific experience in the required technology stack.
+
+Next Steps:
+• Don't give up! Keep applying
+• Consider skill development
+• Apply to similar positions
+• Update your resume based on feedback
+                    `;
+                }
+            } else {
+                // For default/demo applications
+                detailsText = `
+📋 APPLICATION DETAILS
+
+Applicant Name: John Doe
+
+Job Title: ${jobTitle}
+Company: ${company}
+Applied: ${appliedDate}
+Status: ${status}
+                `;
+                
+                if (status === 'Shortlisted') {
+                    statusMessage = '\n🎉 Congratulations! You have been shortlisted.\n\nNext Steps:\n- Interview scheduled for Feb 20, 2025\n- Prepare for technical round\n- Review job description';
+                } else if (status === 'Pending') {
+                    statusMessage = '\n⏳ Your application is under review.\n\nStatus: Application received and being reviewed by HR team.\n\nExpected response: Within 5-7 business days';
+                } else if (status === 'Rejected') {
+                    statusMessage = '\n❌ Unfortunately, your application was not selected this time.\n\nFeedback: The position required more years of experience.\n\nDon\'t give up! Keep applying to other opportunities.';
+                }
+            }
+            
+            alert(detailsText + '\n' + statusMessage);
+        }
+
+        // AI Features functions
+        function showAITool(toolName) {
+            // First, make sure we're on the AI features page
+            showPage('ai-features');
+            
+            // Wait for page to load, then show tool
+            setTimeout(() => {
+                // Hide all tools
+                document.querySelectorAll('[id$="-tool"]').forEach(tool => {
+                    tool.classList.add('hidden');
+                });
+                
+                // Show selected tool
+                const selectedTool = document.getElementById(toolName + '-tool');
+                if (selectedTool) {
+                    selectedTool.classList.remove('hidden');
+                    
+                    // Scroll to tool smoothly
+                    selectedTool.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
+
+        function analyzeResume(event) {
+            const file = event.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                // Show loading message
+                const resultDiv = document.getElementById('resume-analysis-result');
+                resultDiv.classList.remove('hidden');
+                resultDiv.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🔄 Analyzing Your Resume...</h3>
+                        <p style="color: var(--text-light);">Please wait while our AI analyzes your resume</p>
+                        <div style="width: 100%; background: #e5e7eb; height: 10px; border-radius: 10px; margin-top: 1rem; overflow: hidden;">
+                            <div style="width: 0%; height: 100%; background: var(--primary-color); border-radius: 10px; animation: loading 2s ease-in-out forwards;"></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes loading {
+                        0% { width: 0%; }
+                        100% { width: 100%; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Simulate AI analysis
+                setTimeout(() => {
+                    // Generate random score
+                    const score = Math.floor(Math.random() * 20) + 70; // 70-90
+                    
+                    resultDiv.innerHTML = `
+                        <h3 style="color: var(--success); margin-bottom: 1rem;">✓ Analysis Complete!</h3>
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>Overall Score: <span style="color: var(--primary-color);">${score}/100</span></h4>
+                            <div style="background: #e5e7eb; height: 10px; border-radius: 10px; margin-top: 0.5rem;">
+                                <div style="background: var(--primary-color); width: ${score}%; height: 100%; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e5e7eb;">
+                                <h4 style="color: var(--success); margin-bottom: 0.5rem;">✅ Strengths</h4>
+                                <ul style="font-size: 0.9rem; color: var(--text-dark); margin-left: 1rem;">
+                                    <li>Clear contact information</li>
+                                    <li>Good skills section</li>
+                                    <li>Professional formatting</li>
+                                </ul>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e5e7eb;">
+                                <h4 style="color: var(--warning); margin-bottom: 0.5rem;">⚠️ Areas to Improve</h4>
+                                <ul style="font-size: 0.9rem; color: var(--text-dark); margin-left: 1rem;">
+                                    <li>Add more keywords</li>
+                                    <li>Include metrics</li>
+                                    <li>Expand experience</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <h4>📝 Detailed Recommendations:</h4>
+                        <ul style="margin-left: 1.5rem; color: var(--text-dark); line-height: 1.8;">
+                            <li><strong>Quantify achievements:</strong> Use numbers and percentages (e.g., "increased sales by 30%")</li>
+                            <li><strong>Keywords:</strong> Include industry-specific technical keywords for ATS optimization</li>
+                            <li><strong>Skills section:</strong> Add trending technologies and tools in your field</li>
+                            <li><strong>Summary:</strong> Add a compelling professional summary at the top</li>
+                            <li><strong>Format:</strong> Ensure ATS-friendly formatting (avoid tables, images in text area)</li>
+                        </ul>
+                        
+                        <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="document.getElementById('ai-resume-upload').value=''; document.getElementById('resume-analysis-result').classList.add('hidden');">Analyze Another Resume</button>
+                    `;
+                }, 2000);
+            } else if (file) {
+                alert('⚠️ Please upload a PDF file only.');
+            }
+        }
+
+        function generateInterviewQuestions() {
+            const role = document.getElementById('interview-role').value.trim();
+            const level = document.getElementById('interview-level').value;
+            
+            if (!role) {
+                alert('⚠️ Please enter a job role');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('interview-questions-result');
+            
+            // Show loading
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3 style="color: var(--primary-color);">🤖 Generating Interview Questions...</h3>
+                    <p style="color: var(--text-light);">Preparing questions for ${role} (${level})</p>
+                </div>
+            `;
+            
+            // Generate questions based on role
+            setTimeout(() => {
+                const questions = generateQuestionsForRole(role, level);
+                
+                let questionsHTML = '<h3 style="margin-bottom: 1.5rem;">📋 Interview Questions for ' + role + '</h3>';
+                
+                questions.forEach((q, index) => {
+                    questionsHTML += `
+                        <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.05rem;">${index + 1}. ${q.question}</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;"><strong>💡 Tip:</strong> ${q.tip}</p>
+                        </div>
+                    `;
+                });
+                
+                questionsHTML += `
+                    <button class="btn btn-primary" onclick="document.getElementById('interview-role').value=''; document.getElementById('interview-questions-result').classList.add('hidden');" style="margin-top: 1rem;">
+                        Generate New Questions
+                    </button>
+                `;
+                
+                resultDiv.innerHTML = questionsHTML;
+            }, 1500);
+        }
+        
+        function generateQuestionsForRole(role, level) {
+            const commonQuestions = [
+                {
+                    question: "Tell me about yourself and your background.",
+                    tip: "Focus on your professional journey, key achievements, and how they relate to this role."
+                },
+                {
+                    question: "Why are you interested in this " + role + " position?",
+                    tip: "Show genuine enthusiasm and connect your skills to the role's requirements."
+                },
+                {
+                    question: "What are your greatest strengths for this role?",
+                    tip: "Provide specific examples that demonstrate these strengths in action."
+                },
+                {
+                    question: "Describe a challenging project you worked on.",
+                    tip: "Use the STAR method (Situation, Task, Action, Result) to structure your answer."
+                },
+                {
+                    question: "How do you handle tight deadlines and pressure?",
+                    tip: "Give concrete examples of successful time management and prioritization."
+                },
+                {
+                    question: "Where do you see yourself in 5 years?",
+                    tip: "Align your career goals with the company's growth trajectory."
+                }
+            ];
+            
+            return commonQuestions;
+        }
+
+        function getCareerRecommendations() {
+            const skills = document.getElementById('career-skills').value.trim();
+            const experience = document.getElementById('career-experience').value;
+            
+            if (!skills) {
+                alert('⚠️ Please enter your skills');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('career-recommendations-result');
+            
+            // Show loading
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h3 style="color: var(--primary-color);">🤖 Analyzing Your Skills...</h3>
+                    <p style="color: var(--text-light);">Finding the best career matches for you</p>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                const recommendations = matchCareerPaths(skills, experience);
+                
+                let recsHTML = '<h3 style="margin-bottom: 1.5rem;">🎯 Recommended Career Paths:</h3>';
+                recsHTML += '<div style="display: grid; gap: 1.5rem;">';
+                
+                recommendations.forEach(rec => {
+                    recsHTML += `
+                        <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid ${rec.color};">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <h4 style="color: ${rec.color}; margin: 0;">${rec.title}</h4>
+                                <span style="background: ${rec.color}; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; font-weight: 600;">
+                                    ${rec.match}% Match
+                                </span>
+                            </div>
+                            <p style="margin-bottom: 1rem; color: var(--text-dark);">${rec.description}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>💰 Avg. Salary:</strong> ${rec.salary}</p>
+                            <p style="margin-bottom: 1rem;"><strong>📈 Growth:</strong> ${rec.growth}</p>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                ${rec.skills.map(skill => `<span style="background: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">${skill}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                recsHTML += '</div>';
+                recsHTML += `
+                    <button class="btn btn-primary" onclick="document.getElementById('career-skills').value=''; document.getElementById('career-recommendations-result').classList.add('hidden');" style="margin-top: 1.5rem;">
+                        Get New Recommendations
+                    </button>
+                `;
+                
+                resultDiv.innerHTML = recsHTML;
+            }, 1500);
+        }
+        
+        function matchCareerPaths(skillsString, experience) {
+            const skills = skillsString.toLowerCase();
+            const careers = [];
+            
+            // Check for different career paths based on skills
+            if (skills.includes('javascript') || skills.includes('react') || skills.includes('node')) {
+                careers.push({
+                    title: 'Full Stack Developer',
+                    match: 95,
+                    color: 'var(--primary-color)',
+                    description: 'Perfect match for your JavaScript and React skills. High demand with excellent growth opportunities.',
+                    salary: '₹12-20 LPA',
+                    growth: 'Very High (15-20% YoY)',
+                    skills: ['React', 'Node.js', 'JavaScript', 'MongoDB']
+                });
+            }
+            
+            if (skills.includes('python') || skills.includes('data')) {
+                careers.push({
+                    title: 'Data Scientist',
+                    match: 88,
+                    color: 'var(--accent-color)',
+                    description: 'Your Python skills are perfect for data science. Growing field with strong future prospects.',
+                    salary: '₹10-18 LPA',
+                    growth: 'High (12-15% YoY)',
+                    skills: ['Python', 'Machine Learning', 'SQL', 'Statistics']
+                });
+            }
+            
+            if (skills.includes('java') || skills.includes('spring')) {
+                careers.push({
+                    title: 'Backend Developer',
+                    match: 85,
+                    color: 'var(--success)',
+                    description: 'Java expertise is highly valued. Strong demand in enterprise applications.',
+                    salary: '₹11-17 LPA',
+                    growth: 'Stable (10-12% YoY)',
+                    skills: ['Java', 'Spring Boot', 'Microservices', 'SQL']
+                });
+            }
+            
+            // Default recommendation if no specific match
+            if (careers.length === 0) {
+                careers.push({
+                    title: 'Software Developer',
+                    match: 75,
+                    color: 'var(--primary-color)',
+                    description: 'Based on your skills, software development offers good opportunities to grow.',
+                    salary: '₹8-15 LPA',
+                    growth: 'Stable (10-12% YoY)',
+                    skills: ['Programming', 'Problem Solving', 'Teamwork', 'Communication']
+                });
+            }
+            
+            return careers.slice(0, 3); // Return top 3
+        }
+
+        // Chat functions
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message
+                addChatMessage(message, 'user');
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const responses = [
+                        "That's completely normal to feel. Job searching can be stressful, but remember - every 'no' is one step closer to the right 'yes'. What aspect of your search is concerning you most?",
+                        "I understand how you're feeling. It's important to remember that rejection is not a reflection of your worth. Let's focus on what you can control - have you considered updating your resume or expanding your network?",
+                        "Those feelings are valid. Many successful professionals have faced similar challenges. What matters is your persistence and willingness to learn. Would you like some tips on staying motivated during your job search?",
+                        "I hear you. The job search journey can feel overwhelming at times. Remember to celebrate small wins - every application sent, every connection made is progress. How can I support you today?"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addChatMessage(randomResponse, 'ai');
+                }, 1000);
+            }
+        }
+
+        function addChatMessage(text, sender) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<p>${text}</p>`;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadJobs();
+            
+            // Check login status
+            updateAuthButtons();
+            
+            // Load saved profile
+            const savedName = localStorage.getItem('userName');
+            if (savedName && document.getElementById('profile-name')) {
+                document.getElementById('profile-name').value = savedName;
+            }
+            const savedEmail = localStorage.getItem('userEmail');
+            if (savedEmail && document.getElementById('profile-email')) {
+                document.getElementById('profile-email').value = savedEmail;
+            }
+            const savedPhone = localStorage.getItem('userPhone');
+            if (savedPhone && document.getElementById('profile-phone')) {
+                document.getElementById('profile-phone').value = savedPhone;
+            }
+            const savedPosition = localStorage.getItem('userPosition');
+            if (savedPosition && document.getElementById('profile-position')) {
+                document.getElementById('profile-position').value = savedPosition;
+            }
+            const savedSkills = localStorage.getItem('userSkills');
+            if (savedSkills && document.getElementById('profile-skills')) {
+                document.getElementById('profile-skills').value = savedSkills;
+            }
+            const savedBio = localStorage.getItem('userBio');
+            if (savedBio && document.getElementById('profile-bio')) {
+                document.getElementById('profile-bio').value = savedBio;
+            }
+            
+            // Check if resume is uploaded in dashboard
+            const resumeUploaded = localStorage.getItem('resumeUploaded');
+            const resumeFileName = localStorage.getItem('resumeFileName');
+            
+            if (resumeUploaded === 'true' && resumeFileName) {
+                const currentResumeDisplay = document.getElementById('current-resume-display');
+                if (currentResumeDisplay) {
+                    const uploadDate = localStorage.getItem('resumeUploadDate') || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    currentResumeDisplay.style.textAlign = 'left';
+                    currentResumeDisplay.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-weight: 600; margin: 0;">${resumeFileName}</p>
+                                <p style="color: var(--text-light); font-size: 0.9rem; margin: 0.3rem 0 0 0;">Uploaded on: ${uploadDate}</p>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-outline" style="padding: 0.5rem 1rem;" onclick="alert('View functionality - would open PDF viewer')">View</button>
+                                <button class="btn btn-primary" style="padding: 0.5rem 1rem;" onclick="alert('Download functionality - would download file')">Download</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Add visual feedback to filter checkboxes
+            document.querySelectorAll('.filter-option input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Visual feedback that filter changed
+                    this.parentElement.style.backgroundColor = this.checked ? 'var(--bg-light)' : 'transparent';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
